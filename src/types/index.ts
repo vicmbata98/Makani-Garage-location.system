@@ -12,8 +12,50 @@ export interface User {
   specializations?: string[];
   yearsExperience?: number;
   certifications?: string[];
+  garageId?: string;
   // Vehicle owner specific
   vehicles?: Vehicle[];
+}
+
+export interface Garage {
+  id: string;
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  phone: string;
+  email: string;
+  operatingHours: {
+    monday: string;
+    tuesday: string;
+    wednesday: string;
+    thursday: string;
+    friday: string;
+    saturday: string;
+    sunday: string;
+  };
+  services: string[];
+  rating: number;
+  totalReviews: number;
+  coordinates?: {
+    lat: number;
+    lng: number;
+  };
+}
+
+export interface IssueCategory {
+  id: string;
+  name: string;
+  description: string;
+  commonSymptoms: string[];
+  requiredSpecializations: string[];
+  estimatedCost: {
+    min: number;
+    max: number;
+  };
+  estimatedDuration: number; // in hours
+  urgencyLevel: 'low' | 'medium' | 'high' | 'critical';
 }
 
 export interface Vehicle {
@@ -34,6 +76,8 @@ export interface Service {
   vehicleId: string;
   mechanicId: string;
   ownerId: string;
+  garageId: string;
+  issueCategory?: string;
   serviceType: string;
   description: string;
   cost: number;
@@ -62,6 +106,7 @@ export interface Appointment {
   vehicleId: string;
   mechanicId: string;
   ownerId: string;
+  garageId: string;
   scheduledDate: string;
   serviceType: string;
   description: string;
@@ -78,6 +123,8 @@ export type ViewType =
   | 'add-vehicle'
   | 'appointments'
   | 'schedule-appointment'
+  | 'find-garage'
+  | 'garage-details'
   | 'rankings'
   | 'profile' 
   | 'login' 
