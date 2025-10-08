@@ -8,7 +8,7 @@ interface GarageDetailsProps {
 }
 
 export const GarageDetails: React.FC<GarageDetailsProps> = ({ garage, onBack }) => {
-  const today = new Date().toLocaleDateString('en-US', { weekday: 'lowercase' }) as keyof typeof garage.operatingHours;
+  const today = new Date().toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase() as keyof typeof garage.operatingHours;
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

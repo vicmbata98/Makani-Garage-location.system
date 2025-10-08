@@ -140,7 +140,7 @@ export const GarageCard: React.FC<GarageCardProps> = ({ result, onViewDetails })
         <div className="flex items-center">
           <Clock className="h-4 w-4 text-blue-600 mr-1" />
           <span className="text-sm text-blue-700">
-            {garage.operatingHours[new Date().toLocaleDateString('en-US', { weekday: 'lowercase' }) as keyof typeof garage.operatingHours]}
+            {garage.operatingHours[new Date().toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase() as keyof typeof garage.operatingHours]}
           </span>
         </div>
       </div>
