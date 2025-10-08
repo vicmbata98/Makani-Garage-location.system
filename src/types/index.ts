@@ -1,20 +1,46 @@
-export interface User {
+export interface Vehicle {
+  id: string;
+  make: string;
+  model: string;
+  year: number;
+  engineType: string;
+  fuelType: 'gasoline' | 'diesel' | 'electric' | 'hybrid';
+}
+
+export interface IssueCategory {
   id: string;
   name: string;
-  email: string;
-  phone: string;
-  userType: 'mechanic' | 'vehicle_owner';
-  totalPoints: number;
-  rank: number;
-  memberSince: string;
-  avatar?: string;
-  // Mechanic specific
-  specializations?: string[];
-  yearsExperience?: number;
-  certifications?: string[];
-  garageId?: string;
-  // Vehicle owner specific
-  vehicles?: Vehicle[];
+  description: string;
+  symptoms: string[];
+  urgencyLevel: 'low' | 'medium' | 'high' | 'critical';
+  estimatedCost: {
+    min: number;
+    max: number;
+  };
+  estimatedTime: number; // in hours
+  requiredSpecializations: string[];
+  compatibleVehicles: string[]; // vehicle types that commonly have this issue
+}
+
+export interface Mechanic {
+  id: string;
+  name: string;
+  specializations: string[];
+  experience: number; // years
+  rating: number;
+  totalReviews: number;
+  certifications: string[];
+  hourlyRate: number;
+  availability: {
+    monday: string;
+    tuesday: string;
+    wednesday: string;
+    thursday: string;
+    friday: string;
+    saturday: string;
+    sunday: string;
+  };
+  profileImage?: string;
 }
 
 export interface Garage {
@@ -26,6 +52,11 @@ export interface Garage {
   zipCode: string;
   phone: string;
   email: string;
+  website?: string;
+  rating: number;
+  totalReviews: number;
+  services: string[];
+  mechanics: Mechanic[];
   operatingHours: {
     monday: string;
     tuesday: string;
@@ -35,102 +66,30 @@ export interface Garage {
     saturday: string;
     sunday: string;
   };
-  services: string[];
-  rating: number;
-  totalReviews: number;
-  coordinates?: {
+  coordinates: {
     lat: number;
     lng: number;
   };
+  images: string[];
+  priceRange: 'budget' | 'moderate' | 'premium';
+  features: string[]; // e.g., "24/7 Service", "Towing Available", "Warranty"
 }
 
-export interface IssueCategory {
-  id: string;
-  name: string;
-  description: string;
-  commonSymptoms: string[];
-  requiredSpecializations: string[];
+export interface SearchResult {
+  garage: Garage;
+  matchingMechanics: Mechanic[];
+  matchScore: number; // 0-100 based on specialization match
   estimatedCost: {
     min: number;
     max: number;
   };
-  estimatedDuration: number; // in hours
-  urgencyLevel: 'low' | 'medium' | 'high' | 'critical';
+  distance?: number; // in miles
 }
 
-export interface Vehicle {
-  id: string;
-  ownerId: string;
-  make: string;
-  model: string;
-  year: number;
-  licensePlate: string;
-  vin: string;
-  mileage: number;
-  color: string;
-  fuelType: 'gasoline' | 'diesel' | 'electric' | 'hybrid';
-}
-
-export interface Service {
-  id: string;
-  vehicleId: string;
-  mechanicId: string;
-  ownerId: string;
-  garageId: string;
-  issueCategory?: string;
-  serviceType: string;
-  description: string;
-  cost: number;
-  date: string;
-  status: 'pending' | 'in_progress' | 'completed' | 'cancelled';
-  mechanicRating?: number;
-  ownerRating?: number;
-  mechanicReview?: string;
-  ownerReview?: string;
-  pointsEarnedMechanic: number;
-  pointsEarnedOwner: number;
-  estimatedDuration: number; // in hours
-  actualDuration?: number; // in hours
-  partsUsed?: ServicePart[];
-}
-
-export interface ServicePart {
-  id: string;
-  name: string;
-  cost: number;
-  quantity: number;
-}
-
-export interface Appointment {
-  id: string;
-  vehicleId: string;
-  mechanicId: string;
-  ownerId: string;
-  garageId: string;
-  scheduledDate: string;
-  serviceType: string;
-  description: string;
-  status: 'scheduled' | 'confirmed' | 'completed' | 'cancelled';
-  estimatedCost: number;
-  estimatedDuration: number;
-}
-
-export type ViewType = 
-  | 'dashboard' 
-  | 'services' 
-  | 'add-service' 
-  | 'vehicles' 
-  | 'add-vehicle'
-  | 'appointments'
-  | 'schedule-appointment'
-  | 'find-garage'
-  | 'garage-details'
-  | 'rankings'
-  | 'profile' 
-  | 'login' 
-  | 'register';
-
-export interface AuthState {
-  isAuthenticated: boolean;
-  user: User | null;
+export interface SearchFilters {
+  maxDistance: number;
+  priceRange: string[];
+  minRating: number;
+  availability: string; // 'today', 'this_week', 'anytime'
+  features: string[];
 }

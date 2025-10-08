@@ -1,107 +1,214 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Header } from './components/Header';
-import { Auth } from './components/Auth';
-import { Dashboard } from './components/Dashboard';
-import { Services } from './components/Services';
-import { Vehicles } from './components/Vehicles';
-import { Rankings } from './components/Rankings';
-import { Profile } from './components/Profile';
-import { User, ViewType } from './types';
-import { storage } from './utils/storage';
-import { pointsCalculator } from './utils/points';
+import { VehicleSelector } from './components/VehicleSelector';
+import { IssueSelector } from './components/IssueSelector';
+import { SearchFiltersComponent } from './components/SearchFilters';
+import { GarageCard } from './components/GarageCard';
+import { GarageDetails } from './components/GarageDetails';
+import { sampleVehicles, issueCategories, sampleGarages } from './data/sampleData';
+import { GarageSearchEngine } from './utils/searchEngine';
+import { SearchResult, SearchFilters, Garage } from './types';
+import { Search, MapPin } from 'lucide-react';
 
 function App() {
-  const [user, setUser] = useState<User | null>(null);
-  const [currentView, setCurrentView] = useState<ViewType>('dashboard');
-  const [isLoading, setIsLoading] = useState(true);
+  const [selectedVehicle, setSelectedVehicle] = useState('');
+  const [selectedIssue, setSelectedIssue] = useState('');
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
+  const [selectedGarage, setSelectedGarage] = useState<Garage | null>(null);
+  const [filters, setFilters] = useState<SearchFilters>({
+    maxDistance: 25,
+    priceRange: [],
+    minRating: 0,
+    availability: 'anytime',
+    features: []
+  });
 
-  // Load user session on app start
-  useEffect(() => {
-    const savedUser = storage.getCurrentUser();
-    if (savedUser) {
-      // Recalculate rank in case points system changed
-      const updatedUser = {
-        ...savedUser,
-        rank: pointsCalculator.calculateRank(savedUser.totalPoints, savedUser.userType),
-      };
-      setUser(updatedUser);
-      storage.setCurrentUser(updatedUser);
-    } else {
-      setCurrentView('login');
+  const searchEngine = new GarageSearchEngine(sampleGarages, issueCategories);
+
+  const handleSearch = async () => {
+    if (!selectedIssue) return;
+
+    setIsSearching(true);
+    
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    const vehicle = sampleVehicles.find(v => v.id === selectedVehicle);
+    const results = searchEngine.searchByIssue(selectedIssue, vehicle, filters);
+    
+    setSearchResults(results);
+    setIsSearching(false);
+  };
+
+  const handleViewGarageDetails = (garageId: string) => {
+    const garage = sampleGarages.find(g => g.id === garageId);
+    if (garage) {
+      setSelectedGarage(garage);
     }
-    setIsLoading(false);
-  }, []);
-
-  const handleLogin = (loggedInUser: User) => {
-    setUser(loggedInUser);
-    storage.setCurrentUser(loggedInUser);
-    setCurrentView('dashboard');
   };
 
-  const handleLogout = () => {
-    storage.clearCurrentUser();
-    setUser(null);
-    setCurrentView('login');
+  const handleBackToResults = () => {
+    setSelectedGarage(null);
   };
 
-  const handleProfileUpdated = (updatedUser: User) => {
-    setUser(updatedUser);
-  };
-
-  const handleViewChange = (view: ViewType) => {
-    setCurrentView(view);
-  };
-
-  if (isLoading) {
+  if (selectedGarage) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin w-8 h-8 border-4 border-orange-600 border-t-transparent rounded-full"></div>
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <GarageDetails garage={selectedGarage} onBack={handleBackToResults} />
       </div>
-    );
-  }
-
-  // Show auth screens if user is not logged in
-  if (!user || currentView === 'login' || currentView === 'register') {
-    return (
-      <Auth
-        currentView={currentView}
-        onViewChange={handleViewChange}
-        onLogin={handleLogin}
-      />
     );
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header
-        user={user}
-        currentView={currentView}
-        onViewChange={handleViewChange}
-        onLogout={handleLogout}
-      />
+      <Header />
       
-      <main>
-        {currentView === 'dashboard' && (
-          <Dashboard user={user} />
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Hero Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Find the Right Garage & Mechanic
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Get matched with qualified mechanics and trusted garages based on your specific vehicle issue. 
+            Compare prices, ratings, and specializations to make the best choice.
+          </p>
+        </div>
+
+        {/* Search Form */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <VehicleSelector
+              vehicles={sampleVehicles}
+              selectedVehicle={selectedVehicle}
+              onVehicleChange={setSelectedVehicle}
+            />
+            
+            <IssueSelector
+              issues={issueCategories}
+              selectedIssue={selectedIssue}
+              onIssueChange={setSelectedIssue}
+            />
+            
+            <div className="flex items-end">
+              <button
+                onClick={handleSearch}
+                disabled={!selectedIssue || isSearching}
+                className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+              >
+                {isSearching ? (
+                  <>
+                    <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full"></div>
+                    <span>Searching...</span>
+                  </>
+                ) : (
+                  <>
+                    <Search className="h-5 w-5" />
+                    <span>Find Garages</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Filters */}
+        {searchResults.length > 0 && (
+          <div className="mb-8">
+            <SearchFiltersComponent
+              filters={filters}
+              onFiltersChange={setFilters}
+              isVisible={showFilters}
+              onToggle={() => setShowFilters(!showFilters)}
+            />
+          </div>
         )}
-        
-        {currentView === 'services' && (
-          <Services user={user} onViewChange={handleViewChange} />
+
+        {/* Search Results */}
+        {searchResults.length > 0 && (
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-gray-900">
+                Found {searchResults.length} Matching Garage{searchResults.length !== 1 ? 's' : ''}
+              </h2>
+              <div className="flex items-center text-gray-600">
+                <MapPin className="h-4 w-4 mr-1" />
+                <span className="text-sm">Sorted by relevance and rating</span>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {searchResults.map((result) => (
+                <GarageCard
+                  key={result.garage.id}
+                  result={result}
+                  onViewDetails={handleViewGarageDetails}
+                />
+              ))}
+            </div>
+          </div>
         )}
-        
-        {currentView === 'vehicles' && user.userType === 'vehicle_owner' && (
-          <Vehicles user={user} />
+
+        {/* No Results */}
+        {searchResults.length === 0 && selectedIssue && !isSearching && (
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-12 text-center">
+            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Search className="h-8 w-8 text-gray-400" />
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">No Garages Found</h3>
+            <p className="text-gray-600 mb-6">
+              We couldn't find any garages that specialize in your selected issue. 
+              Try adjusting your filters or selecting a different issue.
+            </p>
+            <button
+              onClick={() => {
+                setFilters({
+                  maxDistance: 25,
+                  priceRange: [],
+                  minRating: 0,
+                  availability: 'anytime',
+                  features: []
+                });
+                handleSearch();
+              }}
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200"
+            >
+              Clear Filters & Search Again
+            </button>
+          </div>
         )}
-        
-        {currentView === 'rankings' && (
-          <Rankings user={user} />
-        )}
-        
-        {currentView === 'profile' && (
-          <Profile 
-            user={user} 
-            onProfileUpdated={handleProfileUpdated}
-          />
+
+        {/* Getting Started */}
+        {!selectedIssue && searchResults.length === 0 && (
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">How It Works</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-blue-600 font-bold">1</span>
+                </div>
+                <h4 className="font-medium text-gray-900 mb-2">Select Your Vehicle</h4>
+                <p className="text-sm text-gray-600">Choose your car make, model, and year to get accurate recommendations</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-blue-600 font-bold">2</span>
+                </div>
+                <h4 className="font-medium text-gray-900 mb-2">Describe the Issue</h4>
+                <p className="text-sm text-gray-600">Tell us what's wrong with your car to find specialized mechanics</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-blue-600 font-bold">3</span>
+                </div>
+                <h4 className="font-medium text-gray-900 mb-2">Get Matched</h4>
+                <p className="text-sm text-gray-600">See qualified garages and mechanics with ratings, prices, and availability</p>
+              </div>
+            </div>
+          </div>
         )}
       </main>
     </div>
