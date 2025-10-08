@@ -4,41 +4,121 @@ export const sampleVehicles: Vehicle[] = [
   {
     id: '1',
     make: 'Toyota',
-    model: 'Camry',
-    year: 2020,
-    engineType: '2.5L 4-Cylinder',
+    model: 'Vitz',
+    year: 2018,
+    engineType: '1.0L 3-Cylinder',
     fuelType: 'gasoline'
   },
   {
     id: '2',
-    make: 'Honda',
-    model: 'Civic',
-    year: 2019,
-    engineType: '1.5L Turbo',
+    make: 'Toyota',
+    model: 'Probox',
+    year: 2017,
+    engineType: '1.5L 4-Cylinder',
     fuelType: 'gasoline'
   },
   {
     id: '3',
-    make: 'Ford',
-    model: 'F-150',
-    year: 2021,
-    engineType: '3.5L V6',
-    fuelType: 'gasoline'
+    make: 'Toyota',
+    model: 'Fielder',
+    year: 2019,
+    engineType: '1.5L 4-Cylinder',
+    fuelType: 'hybrid'
   },
   {
     id: '4',
-    make: 'Tesla',
-    model: 'Model 3',
-    year: 2022,
-    engineType: 'Electric Motor',
-    fuelType: 'electric'
+    make: 'Nissan',
+    model: 'Note',
+    year: 2016,
+    engineType: '1.2L 3-Cylinder',
+    fuelType: 'gasoline'
   },
   {
     id: '5',
-    make: 'BMW',
-    model: 'X3',
+    make: 'Nissan',
+    model: 'X-Trail',
     year: 2020,
-    engineType: '2.0L Turbo',
+    engineType: '2.0L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '6',
+    make: 'Honda',
+    model: 'Fit',
+    year: 2017,
+    engineType: '1.3L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '7',
+    make: 'Subaru',
+    model: 'Forester',
+    year: 2019,
+    engineType: '2.0L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '8',
+    make: 'Mazda',
+    model: 'Demio',
+    year: 2016,
+    engineType: '1.3L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '9',
+    make: 'Mitsubishi',
+    model: 'Outlander',
+    year: 2018,
+    engineType: '2.4L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '10',
+    make: 'Suzuki',
+    model: 'Swift',
+    year: 2019,
+    engineType: '1.2L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '11',
+    make: 'Isuzu',
+    model: 'D-Max',
+    year: 2020,
+    engineType: '2.5L Diesel',
+    fuelType: 'diesel'
+  },
+  {
+    id: '12',
+    make: 'Toyota',
+    model: 'Hilux',
+    year: 2021,
+    engineType: '2.4L Diesel',
+    fuelType: 'diesel'
+  },
+  {
+    id: '13',
+    make: 'Toyota',
+    model: 'Prius',
+    year: 2018,
+    engineType: '1.8L Hybrid',
+    fuelType: 'hybrid'
+  },
+  {
+    id: '14',
+    make: 'Volkswagen',
+    model: 'Polo',
+    year: 2017,
+    engineType: '1.4L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '15',
+    make: 'Hyundai',
+    model: 'Tucson',
+    year: 2019,
+    engineType: '2.0L 4-Cylinder',
     fuelType: 'gasoline'
   }
 ];
