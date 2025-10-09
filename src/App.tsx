@@ -5,13 +5,14 @@ import { IssueSelector } from './components/IssueSelector';
 import { SearchFiltersComponent } from './components/SearchFilters';
 import { GarageCard } from './components/GarageCard';
 import { GarageDetails } from './components/GarageDetails';
-import { sampleVehicles, issueCategories, sampleGarages } from './data/sampleData';
+import { allKenyanVehicles, issueCategories, sampleGarages } from './data/sampleData';
 import { GarageSearchEngine } from './utils/searchEngine';
 import { SearchResult, SearchFilters, Garage } from './types';
 import { Search, MapPin } from 'lucide-react';
 
 function App() {
   const [selectedVehicle, setSelectedVehicle] = useState('');
+  const [customVehicleInfo, setCustomVehicleInfo] = useState<{make: string; model: string; year: string} | null>(null);
   const [selectedIssue, setSelectedIssue] = useState('');
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -35,11 +36,33 @@ function App() {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    const vehicle = sampleVehicles.find(v => v.id === selectedVehicle);
+    const vehicle = selectedVehicle 
+      ? allKenyanVehicles.find(v => v.id === selectedVehicle)
+      : customVehicleInfo 
+        ? { 
+            id: 'custom', 
+            make: customVehicleInfo.make, 
+            model: customVehicleInfo.model, 
+            year: parseInt(customVehicleInfo.year),
+            engineType: 'Unknown',
+            fuelType: 'gasoline' as const
+          }
+        : undefined;
+        
     const results = searchEngine.searchByIssue(selectedIssue, vehicle, filters);
     
     setSearchResults(results);
     setIsSearching(false);
+  };
+
+  const handleCustomVehicle = (vehicleInfo: {make: string; model: string; year: string}) => {
+    setCustomVehicleInfo(vehicleInfo);
+    setSelectedVehicle(''); // Clear dropdown selection
+  };
+
+  const handleVehicleChange = (vehicleId: string) => {
+    setSelectedVehicle(vehicleId);
+    setCustomVehicleInfo(null); // Clear custom vehicle
   };
 
   const handleViewGarageDetails = (garageId: string) => {
@@ -82,9 +105,10 @@ function App() {
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
             <VehicleSelector
-              vehicles={sampleVehicles}
+              vehicles={allKenyanVehicles}
               selectedVehicle={selectedVehicle}
-              onVehicleChange={setSelectedVehicle}
+              onVehicleChange={handleVehicleChange}
+              onCustomVehicle={handleCustomVehicle}
             />
             
             <IssueSelector
@@ -96,7 +120,7 @@ function App() {
             <div className="flex items-end">
               <button
                 onClick={handleSearch}
-                disabled={!selectedIssue || isSearching}
+                disabled={(!selectedIssue || (!selectedVehicle && !customVehicleInfo)) || isSearching}
                 className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
               >
                 {isSearching ? (
@@ -113,6 +137,24 @@ function App() {
               </button>
             </div>
           </div>
+
+          {/* Show selected vehicle info */}
+          {(selectedVehicle || customVehicleInfo) && (
+            <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+              <p className="text-sm text-blue-800">
+                <strong>Selected Vehicle:</strong> {
+                  selectedVehicle 
+                    ? (() => {
+                        const vehicle = allKenyanVehicles.find(v => v.id === selectedVehicle);
+                        return vehicle ? `${vehicle.year} ${vehicle.make} ${vehicle.model}` : 'Unknown';
+                      })()
+                    : customVehicleInfo 
+                      ? `${customVehicleInfo.year} ${customVehicleInfo.make} ${customVehicleInfo.model}`
+                      : 'None'
+                }
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Filters */}

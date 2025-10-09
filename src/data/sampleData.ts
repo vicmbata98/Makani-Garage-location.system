@@ -123,6 +123,302 @@ export const sampleVehicles: Vehicle[] = [
   }
 ];
 
+// Additional popular vehicles in Kenya
+export const additionalKenyanVehicles: Vehicle[] = [
+  // More Toyota models
+  {
+    id: '16',
+    make: 'Toyota',
+    model: 'Corolla',
+    year: 2019,
+    engineType: '1.8L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '17',
+    make: 'Toyota',
+    model: 'Camry',
+    year: 2020,
+    engineType: '2.5L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '18',
+    make: 'Toyota',
+    model: 'RAV4',
+    year: 2018,
+    engineType: '2.0L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '19',
+    make: 'Toyota',
+    model: 'Land Cruiser',
+    year: 2017,
+    engineType: '4.0L V6',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '20',
+    make: 'Toyota',
+    model: 'Harrier',
+    year: 2016,
+    engineType: '2.0L 4-Cylinder',
+    fuelType: 'hybrid'
+  },
+  // More Nissan models
+  {
+    id: '21',
+    make: 'Nissan',
+    model: 'Tiida',
+    year: 2015,
+    engineType: '1.5L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '22',
+    make: 'Nissan',
+    model: 'Sunny',
+    year: 2018,
+    engineType: '1.5L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '23',
+    make: 'Nissan',
+    model: 'Patrol',
+    year: 2019,
+    engineType: '4.0L V6',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '24',
+    make: 'Nissan',
+    model: 'Navara',
+    year: 2020,
+    engineType: '2.5L Diesel',
+    fuelType: 'diesel'
+  },
+  // Honda models
+  {
+    id: '25',
+    make: 'Honda',
+    model: 'Civic',
+    year: 2017,
+    engineType: '1.8L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '26',
+    make: 'Honda',
+    model: 'Accord',
+    year: 2018,
+    engineType: '2.4L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '27',
+    make: 'Honda',
+    model: 'CR-V',
+    year: 2019,
+    engineType: '2.0L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '28',
+    make: 'Honda',
+    model: 'Pilot',
+    year: 2016,
+    engineType: '3.5L V6',
+    fuelType: 'gasoline'
+  },
+  // Subaru models
+  {
+    id: '29',
+    make: 'Subaru',
+    model: 'Impreza',
+    year: 2017,
+    engineType: '2.0L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '30',
+    make: 'Subaru',
+    model: 'Outback',
+    year: 2018,
+    engineType: '2.5L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '31',
+    make: 'Subaru',
+    model: 'Legacy',
+    year: 2016,
+    engineType: '2.5L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  // Mazda models
+  {
+    id: '32',
+    make: 'Mazda',
+    model: 'Axela',
+    year: 2017,
+    engineType: '2.0L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '33',
+    make: 'Mazda',
+    model: 'Atenza',
+    year: 2018,
+    engineType: '2.5L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '34',
+    make: 'Mazda',
+    model: 'CX-5',
+    year: 2019,
+    engineType: '2.0L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  // Mitsubishi models
+  {
+    id: '35',
+    make: 'Mitsubishi',
+    model: 'Lancer',
+    year: 2016,
+    engineType: '1.5L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '36',
+    make: 'Mitsubishi',
+    model: 'Pajero',
+    year: 2018,
+    engineType: '3.2L Diesel',
+    fuelType: 'diesel'
+  },
+  {
+    id: '37',
+    make: 'Mitsubishi',
+    model: 'ASX',
+    year: 2017,
+    engineType: '2.0L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  // German cars
+  {
+    id: '38',
+    make: 'BMW',
+    model: '3 Series',
+    year: 2017,
+    engineType: '2.0L Turbo',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '39',
+    make: 'BMW',
+    model: 'X3',
+    year: 2018,
+    engineType: '2.0L Turbo',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '40',
+    make: 'Mercedes-Benz',
+    model: 'C-Class',
+    year: 2016,
+    engineType: '2.0L Turbo',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '41',
+    make: 'Audi',
+    model: 'A4',
+    year: 2017,
+    engineType: '2.0L Turbo',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '42',
+    make: 'Volkswagen',
+    model: 'Golf',
+    year: 2018,
+    engineType: '1.4L Turbo',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '43',
+    make: 'Volkswagen',
+    model: 'Passat',
+    year: 2017,
+    engineType: '2.0L Turbo',
+    fuelType: 'gasoline'
+  },
+  // Korean cars
+  {
+    id: '44',
+    make: 'Hyundai',
+    model: 'Elantra',
+    year: 2018,
+    engineType: '2.0L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '45',
+    make: 'Hyundai',
+    model: 'Santa Fe',
+    year: 2019,
+    engineType: '2.4L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '46',
+    make: 'Kia',
+    model: 'Sportage',
+    year: 2018,
+    engineType: '2.0L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '47',
+    make: 'Kia',
+    model: 'Cerato',
+    year: 2017,
+    engineType: '1.6L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  // More commercial vehicles
+  {
+    id: '48',
+    make: 'Ford',
+    model: 'Ranger',
+    year: 2019,
+    engineType: '2.2L Diesel',
+    fuelType: 'diesel'
+  },
+  {
+    id: '49',
+    make: 'Ford',
+    model: 'Transit',
+    year: 2018,
+    engineType: '2.2L Diesel',
+    fuelType: 'diesel'
+  },
+  {
+    id: '50',
+    make: 'Chevrolet',
+    model: 'Captiva',
+    year: 2016,
+    engineType: '2.4L 4-Cylinder',
+    fuelType: 'gasoline'
+  }
+];
+
+// Combine all vehicles
+export const allKenyanVehicles = [...sampleVehicles, ...additionalKenyanVehicles];
+
 export const issueCategories: IssueCategory[] = [
   {
     id: '1',
