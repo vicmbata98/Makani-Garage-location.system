@@ -554,7 +554,7 @@ export const issueCategories: IssueCategory[] = [
       'Poor fuel economy'
     ],
     urgencyLevel: 'high',
-    estimatedCost: { min: 200, max: 3000 },
+    estimatedCost: { min: 25000, max: 400000 },
     estimatedTime: 4,
     requiredSpecializations: ['Engine Repair', 'Diagnostics', 'Fuel Systems'],
     compatibleVehicles: ['gasoline', 'diesel', 'hybrid']
@@ -572,7 +572,7 @@ export const issueCategories: IssueCategory[] = [
       'Brake fluid leaks'
     ],
     urgencyLevel: 'critical',
-    estimatedCost: { min: 150, max: 800 },
+    estimatedCost: { min: 20000, max: 100000 },
     estimatedTime: 2,
     requiredSpecializations: ['Brake Systems', 'Safety Inspections'],
     compatibleVehicles: ['gasoline', 'diesel', 'electric', 'hybrid']
@@ -590,7 +590,7 @@ export const issueCategories: IssueCategory[] = [
       'Fuse problems'
     ],
     urgencyLevel: 'medium',
-    estimatedCost: { min: 100, max: 1500 },
+    estimatedCost: { min: 12000, max: 200000 },
     estimatedTime: 3,
     requiredSpecializations: ['Electrical Systems', 'Diagnostics', 'Battery Service'],
     compatibleVehicles: ['gasoline', 'diesel', 'electric', 'hybrid']
@@ -608,7 +608,7 @@ export const issueCategories: IssueCategory[] = [
       'Unusual transmission noises'
     ],
     urgencyLevel: 'high',
-    estimatedCost: { min: 500, max: 4000 },
+    estimatedCost: { min: 65000, max: 500000 },
     estimatedTime: 6,
     requiredSpecializations: ['Transmission Repair', 'Fluid Services'],
     compatibleVehicles: ['gasoline', 'diesel', 'hybrid']
@@ -626,7 +626,7 @@ export const issueCategories: IssueCategory[] = [
       'Heating not working'
     ],
     urgencyLevel: 'low',
-    estimatedCost: { min: 150, max: 1200 },
+    estimatedCost: { min: 18000, max: 150000 },
     estimatedTime: 2,
     requiredSpecializations: ['HVAC Systems', 'Refrigerant Service'],
     compatibleVehicles: ['gasoline', 'diesel', 'electric', 'hybrid']
@@ -644,7 +644,7 @@ export const issueCategories: IssueCategory[] = [
       'Difficulty steering'
     ],
     urgencyLevel: 'medium',
-    estimatedCost: { min: 200, max: 1500 },
+    estimatedCost: { min: 25000, max: 200000 },
     estimatedTime: 3,
     requiredSpecializations: ['Suspension Systems', 'Steering Repair', 'Alignment'],
     compatibleVehicles: ['gasoline', 'diesel', 'electric', 'hybrid']
@@ -660,7 +660,7 @@ const sampleMechanics: Mechanic[] = [
     rating: 4.8,
     totalReviews: 127,
     certifications: ['ASE Master Technician', 'Ford Certified'],
-    hourlyRate: 95,
+    hourlyRate: 12000,
     availability: {
       monday: '8:00 AM - 6:00 PM',
       tuesday: '8:00 AM - 6:00 PM',
@@ -679,7 +679,7 @@ const sampleMechanics: Mechanic[] = [
     rating: 4.9,
     totalReviews: 89,
     certifications: ['ASE Electrical Specialist', 'Tesla Certified'],
-    hourlyRate: 105,
+    hourlyRate: 13500,
     availability: {
       monday: '7:00 AM - 5:00 PM',
       tuesday: '7:00 AM - 5:00 PM',
@@ -698,7 +698,7 @@ const sampleMechanics: Mechanic[] = [
     rating: 4.7,
     totalReviews: 203,
     certifications: ['ASE Brake Specialist', 'State Safety Inspector'],
-    hourlyRate: 85,
+    hourlyRate: 11000,
     availability: {
       monday: '8:00 AM - 6:00 PM',
       tuesday: '8:00 AM - 6:00 PM',
@@ -717,7 +717,7 @@ const sampleMechanics: Mechanic[] = [
     rating: 4.6,
     totalReviews: 156,
     certifications: ['ASE Automatic Transmission', 'Allison Certified'],
-    hourlyRate: 110,
+    hourlyRate: 14000,
     availability: {
       monday: '8:00 AM - 5:00 PM',
       tuesday: '8:00 AM - 5:00 PM',
@@ -736,7 +736,7 @@ const sampleMechanics: Mechanic[] = [
     rating: 4.5,
     totalReviews: 78,
     certifications: ['EPA 609 Certified', 'ASE Heating & AC'],
-    hourlyRate: 80,
+    hourlyRate: 10000,
     availability: {
       monday: '9:00 AM - 6:00 PM',
       tuesday: '9:00 AM - 6:00 PM',

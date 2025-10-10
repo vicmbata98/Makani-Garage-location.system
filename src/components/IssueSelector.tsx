@@ -75,7 +75,7 @@ export const IssueSelector: React.FC<IssueSelectorProps> = ({
                   
                   <div>
                     <p className="font-medium text-gray-700 mb-1">Estimated:</p>
-                    <p className="text-gray-600">${issue.estimatedCost.min} - ${issue.estimatedCost.max}</p>
+                    <p className="text-gray-600">KES {issue.estimatedCost.min.toLocaleString()} - {issue.estimatedCost.max.toLocaleString()}</p>
                     <p className="text-gray-600">{issue.estimatedTime} hours</p>
                   </div>
                 </div>

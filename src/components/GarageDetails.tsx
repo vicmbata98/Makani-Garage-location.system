@@ -146,7 +146,7 @@ export const GarageDetails: React.FC<GarageDetailsProps> = ({ garage, onBack }) 
                       </div>
                       <div className="flex items-center text-sm text-gray-600">
                         <DollarSign className="h-3 w-3 mr-1" />
-                        <span>${mechanic.hourlyRate}/hr</span>
+                        <span>KES {mechanic.hourlyRate.toLocaleString()}/hr</span>
                       </div>
                     </div>
                   </div>

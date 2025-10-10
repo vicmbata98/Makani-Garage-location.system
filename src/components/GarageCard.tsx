@@ -80,7 +80,7 @@ export const GarageCard: React.FC<GarageCardProps> = ({ result, onViewDetails })
                   <Star className="h-3 w-3 text-yellow-400 fill-current mr-1" />
                   <span className="text-sm font-medium">{mechanic.rating}</span>
                 </div>
-                <p className="text-xs text-gray-500">${mechanic.hourlyRate}/hr</p>
+                <p className="text-xs text-gray-500">KES {mechanic.hourlyRate.toLocaleString()}/hr</p>
               </div>
             </div>
           ))}
@@ -134,7 +134,7 @@ export const GarageCard: React.FC<GarageCardProps> = ({ result, onViewDetails })
         <div className="flex items-center">
           <DollarSign className="h-4 w-4 text-blue-600 mr-1" />
           <span className="text-sm font-medium text-blue-900">
-            Estimated: ${estimatedCost.min} - ${estimatedCost.max}
+            Estimated: KES {estimatedCost.min.toLocaleString()} - {estimatedCost.max.toLocaleString()}
           </span>
         </div>
         <div className="flex items-center">
