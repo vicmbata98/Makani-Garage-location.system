@@ -11,7 +11,7 @@ export const Header: React.FC = () => {
               <MapPin className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">GarageFinder</h1>
+              <h1 className="text-xl font-bold text-gray-900">Makani Garage Location System</h1>
               <p className="text-xs text-gray-500 hidden sm:block">Find the Right Garage & Mechanic</p>
             </div>
           </div>
