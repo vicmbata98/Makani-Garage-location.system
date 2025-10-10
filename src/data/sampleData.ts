@@ -342,6 +342,126 @@ export const additionalKenyanVehicles: Vehicle[] = [
   },
   {
     id: '42',
+    make: 'Audi',
+    model: 'A3',
+    year: 2018,
+    engineType: '1.4L Turbo',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '43',
+    make: 'Audi',
+    model: 'A6',
+    year: 2019,
+    engineType: '3.0L V6 Turbo',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '44',
+    make: 'Audi',
+    model: 'Q3',
+    year: 2018,
+    engineType: '2.0L Turbo',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '45',
+    make: 'Audi',
+    model: 'Q5',
+    year: 2017,
+    engineType: '2.0L Turbo',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '46',
+    make: 'Audi',
+    model: 'Q7',
+    year: 2019,
+    engineType: '3.0L V6 Turbo',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '47',
+    make: 'Audi',
+    model: 'A1',
+    year: 2016,
+    engineType: '1.2L Turbo',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '48',
+    make: 'Peugeot',
+    model: '208',
+    year: 2018,
+    engineType: '1.2L 3-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '49',
+    make: 'Peugeot',
+    model: '308',
+    year: 2017,
+    engineType: '1.6L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '50',
+    make: 'Peugeot',
+    model: '508',
+    year: 2019,
+    engineType: '2.0L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '51',
+    make: 'Peugeot',
+    model: '2008',
+    year: 2018,
+    engineType: '1.2L Turbo',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '52',
+    make: 'Peugeot',
+    model: '3008',
+    year: 2019,
+    engineType: '1.6L Turbo',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '53',
+    make: 'Peugeot',
+    model: '5008',
+    year: 2018,
+    engineType: '1.6L Turbo',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '54',
+    make: 'Peugeot',
+    model: '206',
+    year: 2016,
+    engineType: '1.4L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '55',
+    make: 'Peugeot',
+    model: '307',
+    year: 2017,
+    engineType: '1.6L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '56',
+    make: 'Peugeot',
+    model: '407',
+    year: 2016,
+    engineType: '2.0L 4-Cylinder',
+    fuelType: 'gasoline'
+  },
+  {
+    id: '57',
     make: 'Volkswagen',
     model: 'Golf',
     year: 2018,
@@ -349,7 +469,7 @@ export const additionalKenyanVehicles: Vehicle[] = [
     fuelType: 'gasoline'
   },
   {
-    id: '43',
+    id: '58',
     make: 'Volkswagen',
     model: 'Passat',
     year: 2017,
@@ -358,7 +478,7 @@ export const additionalKenyanVehicles: Vehicle[] = [
   },
   // Korean cars
   {
-    id: '44',
+    id: '59',
     make: 'Hyundai',
     model: 'Elantra',
     year: 2018,
@@ -366,7 +486,7 @@ export const additionalKenyanVehicles: Vehicle[] = [
     fuelType: 'gasoline'
   },
   {
-    id: '45',
+    id: '60',
     make: 'Hyundai',
     model: 'Santa Fe',
     year: 2019,
@@ -374,7 +494,7 @@ export const additionalKenyanVehicles: Vehicle[] = [
     fuelType: 'gasoline'
   },
   {
-    id: '46',
+    id: '61',
     make: 'Kia',
     model: 'Sportage',
     year: 2018,
@@ -382,7 +502,7 @@ export const additionalKenyanVehicles: Vehicle[] = [
     fuelType: 'gasoline'
   },
   {
-    id: '47',
+    id: '62',
     make: 'Kia',
     model: 'Cerato',
     year: 2017,
@@ -391,7 +511,7 @@ export const additionalKenyanVehicles: Vehicle[] = [
   },
   // More commercial vehicles
   {
-    id: '48',
+    id: '63',
     make: 'Ford',
     model: 'Ranger',
     year: 2019,
@@ -399,7 +519,7 @@ export const additionalKenyanVehicles: Vehicle[] = [
     fuelType: 'diesel'
   },
   {
-    id: '49',
+    id: '64',
     make: 'Ford',
     model: 'Transit',
     year: 2018,
@@ -407,7 +527,7 @@ export const additionalKenyanVehicles: Vehicle[] = [
     fuelType: 'diesel'
   },
   {
-    id: '50',
+    id: '65',
     make: 'Chevrolet',
     model: 'Captiva',
     year: 2016,
