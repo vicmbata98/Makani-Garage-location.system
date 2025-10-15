@@ -3,10 +3,12 @@ import { Header } from './components/Header';
 import { VehicleSelector } from './components/VehicleSelector';
 import { IssueSelector } from './components/IssueSelector';
 import { SearchFiltersComponent } from './components/SearchFilters';
+import { LocationFinder } from './components/LocationFinder';
 import { GarageCard } from './components/GarageCard';
 import { GarageDetails } from './components/GarageDetails';
 import { allKenyanVehicles, issueCategories, sampleGarages } from './data/sampleData';
 import { GarageSearchEngine } from './utils/searchEngine';
+import { calculateDistance, formatDistance, formatTravelTime, calculateTravelTime } from './utils/distanceCalculator';
 import { SearchResult, SearchFilters, Garage } from './types';
 import { Search, MapPin } from 'lucide-react';
 
@@ -14,6 +16,7 @@ function App() {
   const [selectedVehicle, setSelectedVehicle] = useState('');
   const [customVehicleInfo, setCustomVehicleInfo] = useState<{make: string; model: string; year: string} | null>(null);
   const [selectedIssue, setSelectedIssue] = useState('');
+  const [userLocation, setUserLocation] = useState<{lat: number; lng: number; address: string} | null>(null);
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
@@ -49,7 +52,18 @@ function App() {
           }
         : undefined;
         
-    const results = searchEngine.searchByIssue(selectedIssue, vehicle, filters);
+    let results = searchEngine.searchByIssue(selectedIssue, vehicle, filters);
+    
+    // Add distance information if user location is available
+    if (userLocation) {
+      results = results.map(result => ({
+        ...result,
+        distance: calculateDistance(userLocation, result.garage.coordinates)
+      }));
+      
+      // Sort by distance if location is available
+      results.sort((a, b) => (a.distance || 0) - (b.distance || 0));
+    }
     
     setSearchResults(results);
     setIsSearching(false);
@@ -103,7 +117,12 @@ function App() {
 
         {/* Search Form */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
+            <LocationFinder
+              onLocationSelected={setUserLocation}
+              selectedLocation={userLocation}
+            />
+            
             <VehicleSelector
               vehicles={allKenyanVehicles}
               selectedVehicle={selectedVehicle}
@@ -175,10 +194,17 @@ function App() {
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-900">
                 Found {searchResults.length} Matching Garage{searchResults.length !== 1 ? 's' : ''}
+                {userLocation && (
+                  <span className="text-lg font-normal text-gray-600 ml-2">
+                    near {userLocation.address}
+                  </span>
+                )}
               </h2>
               <div className="flex items-center text-gray-600">
                 <MapPin className="h-4 w-4 mr-1" />
-                <span className="text-sm">Sorted by relevance and rating</span>
+                <span className="text-sm">
+                  {userLocation ? 'Sorted by distance' : 'Sorted by relevance and rating'}
+                </span>
               </div>
             </div>
             

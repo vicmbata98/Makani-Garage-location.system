@@ -1,6 +1,7 @@
 import React from 'react';
-import { MapPin, Phone, Star, Clock, DollarSign, Award, Users } from 'lucide-react';
+import { MapPin, Phone, Star, Clock, DollarSign, Award, Users, Navigation } from 'lucide-react';
 import { SearchResult } from '../types';
+import { formatDistance, formatTravelTime, calculateTravelTime } from '../utils/distanceCalculator';
 
 interface GarageCardProps {
   result: SearchResult;
@@ -144,6 +145,24 @@ export const GarageCard: React.FC<GarageCardProps> = ({ result, onViewDetails })
           </span>
         </div>
       </div>
+
+      {/* Distance and Travel Time */}
+      {result.distance !== undefined && (
+        <div className="flex items-center justify-between mb-4 p-3 bg-green-50 rounded-lg">
+          <div className="flex items-center">
+            <Navigation className="h-4 w-4 text-green-600 mr-1" />
+            <span className="text-sm font-medium text-green-900">
+              {formatDistance(result.distance)} away
+            </span>
+          </div>
+          <div className="flex items-center">
+            <Clock className="h-4 w-4 text-green-600 mr-1" />
+            <span className="text-sm text-green-700">
+              ~{formatTravelTime(calculateTravelTime(result.distance))} drive
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* Action Buttons */}
       <div className="flex gap-3">

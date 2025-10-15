@@ -84,6 +84,7 @@ export interface SearchResult {
     max: number;
   };
   distance?: number; // in miles
+  distance?: number; // in kilometers
 }
 
 export interface SearchFilters {
