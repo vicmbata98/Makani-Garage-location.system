@@ -78,6 +78,7 @@ export const LocationFinder: React.FC<LocationFinderProps> = ({
   const reverseGeocode = async (lat: number, lng: number): Promise<string> => {
     // Mock reverse geocoding - in a real app, you'd use Google Maps API, Mapbox, or similar
     const nairobiAreas = [
+      'Simba Close, Nairobi',
       'Westlands, Nairobi',
       'Karen, Nairobi',
       'Eastleigh, Nairobi',
@@ -89,13 +90,39 @@ export const LocationFinder: React.FC<LocationFinderProps> = ({
       'South B, Nairobi',
       'South C, Nairobi',
       'Kasarani, Nairobi',
-      'Embakasi, Nairobi'
+      'Embakasi, Nairobi',
+      'Kileleshwa, Nairobi',
+      'Hurlingham, Nairobi',
+      'Runda, Nairobi',
+      'Muthaiga, Nairobi',
+      'Spring Valley, Nairobi',
+      'Gigiri, Nairobi',
+      'Riverside, Nairobi',
+      'Upper Hill, Nairobi',
+      'Ngong Road, Nairobi',
+      'Lang\'ata, Nairobi',
+      'Donholm, Nairobi',
+      'Buruburu, Nairobi',
+      'Umoja, Nairobi',
+      'Kahawa, Nairobi',
+      'Thika Road, Nairobi',
+      'Mombasa Road, Nairobi'
     ];
     
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // Return a random Nairobi area for demo purposes
+    // For demo purposes, prioritize Simba Close or return based on coordinates
+    if (lat >= -1.29 && lat <= -1.28 && lng >= 36.82 && lng <= 36.83) {
+      return 'Simba Close, Nairobi';
+    }
+    
+    // Return other areas based on rough coordinate ranges
+    if (lat >= -1.27 && lng >= 36.81) return 'Westlands, Nairobi';
+    if (lat <= -1.32 && lng <= 36.71) return 'Karen, Nairobi';
+    if (lat >= -1.29 && lng >= 36.82) return 'Eastleigh, Nairobi';
+    
+    // Fallback to random area
     return nairobiAreas[Math.floor(Math.random() * nairobiAreas.length)];
   };
 
